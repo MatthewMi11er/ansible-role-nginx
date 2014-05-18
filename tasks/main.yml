@@ -1,0 +1,44 @@
+---
+# file: nginx/tasks/main.yml
+
+- name: Install Packages
+  apt: >
+    pkg={{ item }}
+    state=latest
+  with_items:
+    - nginx-light
+  notify:
+    - Restart Nginx
+
+- name: Copy Nginx Base Config
+  copy: >
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner=root
+    group=root
+    mode=0644
+  with_items:
+        - { src: 'nginx.conf',                    dest: '/etc/nginx/nginx.conf' }
+        - { src: 'mime.types',                    dest: '/etc/nginx/mime.types' }
+        - { src: 'fastcgi_params',                dest: '/etc/nginx/fastcgi_params' }
+        - { src: 'sites-available/default',       dest: '/etc/nginx/sites-available/default' }
+        - { src: 'conf.d/common.conf',            dest: '/etc/nginx/conf.d/common.conf' }
+        - { src: 'conf.d/hide-headers.conf',      dest: '/etc/nginx/conf.d/hide-headers.conf' }
+  notify:
+    - Restart Nginx
+
+- name: Enable Default Site
+  file: >
+    src='/etc/nginx/sites-available/default'
+    dest='/etc/nginx/sites-enabled/default'
+    state=link
+  notify:
+    - Restart Nginx
+
+- name: Start Nginx
+  service: name=nginx state=started enabled=yes
+
+- name: Open HTTP Ports
+  ufw: rule=allow name='Nginx HTTP'
+  notify:
+    - Reload ufw

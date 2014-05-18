@@ -1,0 +1,11 @@
+---
+# file: nginx/handlers/main.yml
+
+- name: Restart Nginx
+  service: name=nginx state=restarted enabled=yes
+
+- name: Reload Nginx
+  service: name=nginx state=reloaded enabled=yes
+
+- name: Reload ufw
+  ufw: state=reloaded
