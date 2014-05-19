@@ -1,0 +1,5 @@
+---
+# nginx/meta/main.yml
+
+dependencies:
+  - { role: ufw }
