@@ -18,19 +18,19 @@
     group=root
     mode=0644
   with_items:
-        - { src: 'nginx.conf',                    dest: '/etc/nginx/nginx.conf' }
-        - { src: 'mime.types',                    dest: '/etc/nginx/mime.types' }
-        - { src: 'fastcgi_params',                dest: '/etc/nginx/fastcgi_params' }
-        - { src: 'sites-available/default',       dest: '/etc/nginx/sites-available/default' }
-        - { src: 'conf.d/common.conf',            dest: '/etc/nginx/conf.d/common.conf' }
-        - { src: 'conf.d/hide-headers.conf',      dest: '/etc/nginx/conf.d/hide-headers.conf' }
+        - { src: 'nginx.conf',                    dest: '{{ nginx_root }}/nginx.conf' }
+        - { src: 'mime.types',                    dest: '{{ nginx_root }}/mime.types' }
+        - { src: 'fastcgi_params',                dest: '{{ nginx_root }}/fastcgi_params' }
+        - { src: 'sites-available/default',       dest: '{{ nginx_root }}/sites-available/default' }
+        - { src: 'conf.d/common.conf',            dest: '{{ nginx_root }}/conf.d/common.conf' }
+        - { src: 'conf.d/hide-headers.conf',      dest: '{{ nginx_root }}/conf.d/hide-headers.conf' }
   notify:
     - Restart Nginx
 
 - name: Enable Default Site
   file: >
-    src='/etc/nginx/sites-available/default'
-    dest='/etc/nginx/sites-enabled/default'
+    src='{{ nginx_root }}/sites-available/default'
+    dest='{{ nginx_root }}/sites-enabled/default'
     state=link
   notify:
     - Restart Nginx

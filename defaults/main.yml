@@ -1,0 +1,4 @@
+---
+# file: nginx/defaults/main.yml
+
+nginx_root: '/etc/nginx'
