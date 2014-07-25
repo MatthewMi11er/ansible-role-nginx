@@ -2,4 +2,6 @@
 # nginx/meta/main.yml
 
 dependencies:
-  - { role: ufw }
+  - { role: mi11er.ufw }
+
+version: 1.0.0
