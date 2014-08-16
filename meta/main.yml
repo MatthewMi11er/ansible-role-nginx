@@ -2,6 +2,18 @@
 # nginx/meta/main.yml
 
 dependencies:
-  - { role: mi11er.ufw }
+  - { role: MatthewMi11er.ufw }
 
 version: 1.0.0
+galaxy_info:
+  author: Matthew Miller
+  description: A role to configure nginx
+  company:
+  license: license (MIT)
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+      - trusty
+  categories:
+    - web
