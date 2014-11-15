@@ -2,3 +2,7 @@
 # file: nginx/defaults/main.yml
 
 nginx_root: '/etc/nginx'
+nginx_enable_default_http: true
+nginx_enable_default_https: false
+#nginx_private_key:
+#nginx_public_key:

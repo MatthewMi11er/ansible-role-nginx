@@ -1,0 +1,29 @@
+---
+# file: nginx/tasks/default_https.yml
+
+- name: Copy Certs
+  copy: >
+    src={{ item.src }}
+    dest={{ item.dest }}
+    owner=root
+    group=root
+    mode=0644
+  with_items:
+        - { src: '{{ nginx_private_key }}',                    dest: '{{ nginx_root }}/default-key.pem' }
+        - { src: '{{ nginx_public_key }}',                    dest: '{{ nginx_root }}/default.pem' }
+  notify:
+    - Reload Nginx
+
+
+- name: Enable Default Site
+  file: >
+    src='{{ nginx_root }}/sites-available/default_https'
+    dest='{{ nginx_root }}/sites-enabled/default_https'
+    state=link
+  notify:
+    - Reload Nginx
+
+- name: Open HTTP Ports
+  ufw: rule=allow name='Nginx HTTPS'
+  notify:
+    - Reload ufw

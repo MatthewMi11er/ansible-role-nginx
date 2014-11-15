@@ -1,0 +1,15 @@
+---
+# file: nginx/tasks/default_http.yml
+
+- name: Enable Default Site
+  file: >
+    src='{{ nginx_root }}/sites-available/default'
+    dest='{{ nginx_root }}/sites-enabled/default'
+    state=link
+  notify:
+    - Resload Nginx
+
+- name: Open HTTP Ports
+  ufw: rule=allow name='Nginx HTTP'
+  notify:
+    - Reload ufw
