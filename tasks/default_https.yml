@@ -1,19 +1,19 @@
 ---
 # file: nginx/tasks/default_https.yml
 
-- name: Copy Certs
-  copy: >
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner=root
-    group=root
-    mode=0644
-  with_items:
-        - { src: '{{ nginx_private_key }}',                    dest: '{{ nginx_root }}/default-key.pem' }
-        - { src: '{{ nginx_public_key }}',                    dest: '{{ nginx_root }}/default.pem' }
+- name: Copy Public Key
+  copy: 
+    content: '{{ nginx_public_key }}'
+    dest: '{{ nginx_root }}/default.pem'
   notify:
     - Reload Nginx
-
+    
+- name: Copy Public Key
+  copy:
+    content: '{{ nginx_private_key }}'
+    dest: '{{ nginx_root }}/default-key.pem'
+  notify:
+    - Reload Nginx
 
 - name: Enable Default Site
   file: >
