@@ -4,14 +4,14 @@
 - name: Copy Public Key
   copy: 
     content: '{{ nginx_public_key }}'
-    dest: '{{ nginx_root }}/default.pem'
+    dest: '{{ nginx_root }}/certs/default.pem'
   notify:
     - Reload Nginx
     
 - name: Copy Private Key
   copy:
     content: '{{ nginx_private_key }}'
-    dest: '{{ nginx_root }}/default-key.pem'
+    dest: '{{ nginx_root }}/certs/default-key.pem'
   notify:
     - Reload Nginx
 
@@ -22,8 +22,4 @@
     state=link
   notify:
     - Reload Nginx
-
-- name: Open HTTP Ports
-  ufw: rule=allow name='Nginx HTTPS'
-  notify:
-    - Reload ufw
+    - Open HTTPS Ports
