@@ -9,3 +9,9 @@
 
 - name: Reload ufw
   ufw: state=reloaded
+  
+- name: Open HTTP Ports
+  ufw: rule=allow name='Nginx HTTP'
+
+- name: Open HTTPS Ports
+  ufw: rule=allow name='Nginx HTTPS'

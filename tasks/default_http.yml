@@ -7,9 +7,5 @@
     dest='{{ nginx_root }}/sites-enabled/default'
     state=link
   notify:
-    - Resload Nginx
-
-- name: Open HTTP Ports
-  ufw: rule=allow name='Nginx HTTP'
-  notify:
-    - Reload ufw
+    - Reload Nginx
+    - Open HTTP Ports
