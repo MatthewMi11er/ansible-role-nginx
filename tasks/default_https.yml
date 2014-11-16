@@ -23,7 +23,7 @@
   notify:
     - Reload Nginx
 
-- name: Open HTTP Ports
+- name: Open HTTPS Ports
   ufw: rule=allow name='Nginx HTTPS'
   notify:
     - Reload ufw

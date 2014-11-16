@@ -32,6 +32,14 @@
   include: default_http.yml
   when: nginx_enable_default_http
   
+- name: Create certs dir
+  file: >
+    path={{ nginx_root }}/certs
+    owner=root
+    group=root
+    mode='0644'
+    state=directory
+  
 - name: Enable Default https Site
   include: default_https.yml
   when: nginx_enable_default_https
