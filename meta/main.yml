@@ -2,7 +2,7 @@
 # nginx/meta/main.yml
 
 dependencies:
-  - { role: MatthewMi11er.ufw }
+  - role: MatthewMi11er.ufw
 
 version: 1.0.0
 galaxy_info:
