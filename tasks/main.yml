@@ -9,6 +9,8 @@
     - nginx-light
   notify:
     - Restart Nginx
+  tags:
+    - nginx
 
 - name: Copy Nginx Base Config
   copy: >
@@ -27,10 +29,14 @@
         - { src: 'conf.d/hide-headers.conf',      dest: '{{ nginx_root }}/conf.d/hide-headers.conf' }
   notify:
     - Reload Nginx
+  tags:
+    - nginx
 
 - name: Enable Default Site
   include: default_http.yml
   when: nginx_enable_default_http
+  tags:
+    - nginx
   
 - name: Create certs dir
   file: >
@@ -39,10 +45,16 @@
     group=root
     mode='0644'
     state=directory
+  tags:
+    - nginx
   
 - name: Enable Default https Site
   include: default_https.yml
   when: nginx_enable_default_https
+  tags:
+    - nginx
   
 - name: Start Nginx
   service: name=nginx state=started enabled=yes
+  tags:
+    - nginx
