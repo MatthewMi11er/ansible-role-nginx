@@ -9,3 +9,5 @@
   notify:
     - Reload Nginx
     - Open HTTP Ports
+  tags:
+    - nginx

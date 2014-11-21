@@ -1,10 +1,6 @@
 ---
 # nginx/meta/main.yml
 
-dependencies:
-  - role: MatthewMi11er.ufw
-
-version: 1.0.0
 galaxy_info:
   author: Matthew Miller
   description: A role to configure nginx
@@ -17,3 +13,6 @@ galaxy_info:
       - trusty
   categories:
     - web
+    
+dependencies:
+  - MatthewMi11er.ufw
