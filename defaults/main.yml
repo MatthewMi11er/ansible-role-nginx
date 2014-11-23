@@ -8,3 +8,4 @@ nginx_private_key: |
   '**SOME PRIVATE KEY **'
 nginx_public_key: |
   '**SOME PUBLIC KEY **'
+nginx_install_mainline: false
