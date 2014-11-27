@@ -12,7 +12,7 @@
   copy:
     content: |
       deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
-      deb-src http://nginx.org/packages/mainline/ ubuntu/ trusty nginx
+      deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx
     dest: /etc/apt/sources.list.d/nginx.list
     owner: root
     group: root
