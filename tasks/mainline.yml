@@ -1,0 +1,40 @@
+---
+# file: nginx/tasks/default_https.yml
+
+- name: Add nginx.org repo key
+  apt_key:
+    url: http://nginx.org/keys/nginx_signing.key
+    state: present
+  tags:
+    - nginx
+
+- name: Add nginx.org repository
+  copy:
+    content: |
+      deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+      deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+    dest: /etc/apt/sources.list.d/nginx.list
+    owner: root
+    group: root
+    mode: 0644
+  register: nginx_repo
+  tags:
+    - nginx
+
+- name: apt-get update
+  apt:
+    update_cache: yes
+  when: nginx_repo.changed
+  tags:
+    - nginx
+
+- name: Install Nginx
+  apt:
+    pkg: nginx
+    update_cache: yes
+    cache_valid_time: 86400
+    state: latest
+  notify:
+    - Reload Nginx
+  tags:
+    - nginx

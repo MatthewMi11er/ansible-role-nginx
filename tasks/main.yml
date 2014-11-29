@@ -1,12 +1,19 @@
 ---
 # file: nginx/tasks/main.yml
 
+- name: Install from Nginx.org mainline
+  include: mainline.yml
+  when: nginx_install_mainline
+  tags:
+    - nginx
+
 - name: Install Packages
   apt: >
     pkg={{ item }}
     state=latest
   with_items:
     - nginx-light
+  when: not nginx_install_mainline
   notify:
     - Restart Nginx
   tags:

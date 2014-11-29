@@ -9,9 +9,12 @@
 
 - name: Reload ufw
   ufw: state=reloaded
+  when: not ufw_override_web
   
 - name: Open HTTP Ports
   ufw: rule=allow name='Nginx HTTP'
-
+  when: not ufw_override_web
+  
 - name: Open HTTPS Ports
   ufw: rule=allow name='Nginx HTTPS'
+  when: not ufw_override_web
