@@ -20,20 +20,14 @@
     - nginx
 
 - name: Copy Nginx Base Config
-  copy: >
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner=root
-    group=root
-    mode=0644
-  with_items:
-        - { src: 'nginx.conf',                    dest: '{{ nginx_root }}/nginx.conf' }
-        - { src: 'mime.types',                    dest: '{{ nginx_root }}/mime.types' }
-        - { src: 'fastcgi_params',                dest: '{{ nginx_root }}/fastcgi_params' }
-        - { src: 'sites-available/default',       dest: '{{ nginx_root }}/sites-available/default' }
-        - { src: 'sites-available/default_https', dest: '{{ nginx_root }}/sites-available/default_https' }
-        - { src: 'conf.d/common.conf',            dest: '{{ nginx_root }}/conf.d/common.conf' }
-        - { src: 'conf.d/hide-headers.conf',      dest: '{{ nginx_root }}/conf.d/hide-headers.conf' }
+  copy:
+    src: '{{ item }}'
+    dest: '{{ nginx_root }}/{{ item }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglobs:
+        - etc_nginx/*
   notify:
     - Reload Nginx
   tags:
