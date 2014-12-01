@@ -26,7 +26,7 @@
     owner: root
     group: root
     mode: 0644
-  with_fileglobs:
+  with_fileglob:
         - etc_nginx/*
   notify:
     - Reload Nginx
