@@ -18,6 +18,20 @@
     - Restart Nginx
   tags:
     - nginx
+    
+- name: Create directorys
+  file:
+    path: '{{ item }}' 
+    owner: root
+    group: root
+    mode: 0644
+    state: directory
+  with_items:
+    - '{{ nginx_root }}/includes'
+    - '{{ nginx_root }}/includes/directives-only'
+  tags:
+    - nginx
+
 
 - name: Copy Nginx Base Config
   copy:
