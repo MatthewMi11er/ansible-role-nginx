@@ -4,8 +4,14 @@
 nginx_root: '/etc/nginx'
 nginx_enable_default_http: true
 nginx_enable_default_https: false
-nginx_private_key: |
-  '**SOME PRIVATE KEY **'
-nginx_public_key: |
-  '**SOME PUBLIC KEY **'
-nginx_install_mainline: false
+nginx_install_type: mainline  # mainline | ubuntu
+
+###############################
+## Vars With No Default      ##
+## If needed these vars must ##
+## be set or play will fail  ##
+###############################
+# nginx_private_key: |
+#   '**SOME PRIVATE KEY **'
+# nginx_public_key: |
+#   '**SOME PUBLIC KEY **'

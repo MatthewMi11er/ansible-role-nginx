@@ -13,6 +13,4 @@ galaxy_info:
       - trusty
   categories:
     - web
-    
-dependencies:
-  - MatthewMi11er.ufw
+dependencies: []

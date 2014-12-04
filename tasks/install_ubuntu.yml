@@ -1,0 +1,11 @@
+---
+# file: nginx/tasks/install_ubuntu.yml
+
+- name: Install Nginx
+  apt: >
+    pkg={{ item }}
+    state=latest
+  with_items:
+    - nginx-light
+  notify:
+    - Restart Nginx
