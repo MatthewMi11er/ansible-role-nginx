@@ -8,6 +8,3 @@
     state=link
   notify:
     - Reload Nginx
-    - Open HTTP Ports
-  tags:
-    - nginx

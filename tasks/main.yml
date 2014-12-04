@@ -1,24 +1,18 @@
 ---
 # file: nginx/tasks/main.yml
 
-- name: Install from Nginx.org mainline
+- name: Install from Nginx.org Mainline
   include: mainline.yml
-  when: nginx_install_mainline
-  tags:
-    - nginx
-
-- name: Install Packages
-  apt: >
-    pkg={{ item }}
-    state=latest
-  with_items:
-    - nginx-light
-  when: not nginx_install_mainline
-  notify:
-    - Restart Nginx
+  when: nginx_install_type == 'mainline'
   tags:
     - nginx
     
+- name: Install from Ubuntu Default Sources
+  include: mainline.yml
+  when: nginx_install_type == 'ubuntu'
+  tags:
+    - nginx
+
 - name: Copy Nginx Base Config
   copy:
     src: 'etc_nginx/'
@@ -36,17 +30,7 @@
   when: nginx_enable_default_http
   tags:
     - nginx
-  
-- name: Create certs dir
-  file: >
-    path={{ nginx_root }}/certs
-    owner=root
-    group=root
-    mode='0644'
-    state=directory
-  tags:
-    - nginx
-  
+
 - name: Enable Default https Site
   include: default_https.yml
   when: nginx_enable_default_https
@@ -54,6 +38,9 @@
     - nginx
   
 - name: Start Nginx
-  service: name=nginx state=started enabled=yes
+  service: 
+    name: nginx 
+    state: started 
+    enabled: yes
   tags:
     - nginx

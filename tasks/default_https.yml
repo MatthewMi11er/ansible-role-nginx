@@ -7,17 +7,13 @@
     dest: '{{ nginx_root }}/certs/default.pem'
   notify:
     - Reload Nginx
-  tags:
-    - nginx
-    
+
 - name: Copy Private Key
   copy:
     content: '{{ nginx_private_key }}'
     dest: '{{ nginx_root }}/certs/default-key.pem'
   notify:
     - Reload Nginx
-  tags:
-    - nginx
     
 - name: Enable Default Site
   file: >
@@ -26,6 +22,3 @@
     state=link
   notify:
     - Reload Nginx
-    - Open HTTPS Ports
-  tags:
-    - nginx
