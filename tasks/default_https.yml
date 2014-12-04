@@ -14,7 +14,6 @@
     dest: '{{ nginx_root }}/certs/default-key.pem'
   notify:
     - Reload Nginx
-
     
 - name: Enable Default Site
   file: >
