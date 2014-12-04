@@ -2,7 +2,14 @@
 # file: nginx/tasks/main.yml
 
 - name: Install from Nginx.org Mainline
-  include: 'install_{{ nginx_install_type }}.yml'
+  include: install_mainline.yml
+  when: nginx_install_type == 'mainline'
+  tags:
+    - nginx
+    
+- name: Install from Ubunut Default Sources
+  include: install_ubuntu.yml
+  when: nginx_install_type == 'ubuntu'
   tags:
     - nginx
     
