@@ -1,7 +1,7 @@
 ---
 # file: nginx/tasks/install_ubuntu.yml
 
-- name: Install Nginx
+- name: Install from Ubuntu Default Sources
   apt: >
     pkg={{ item }}
     state=latest

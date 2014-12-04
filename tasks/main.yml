@@ -2,17 +2,10 @@
 # file: nginx/tasks/main.yml
 
 - name: Install from Nginx.org Mainline
-  include: mainline.yml
-  when: nginx_install_type == 'mainline'
+  include: 'install_{{ nginx_install_type }}.yml'
   tags:
     - nginx
     
-- name: Install from Ubuntu Default Sources
-  include: mainline.yml
-  when: nginx_install_type == 'ubuntu'
-  tags:
-    - nginx
-
 - name: Copy Nginx Base Config
   copy:
     src: 'etc_nginx/'

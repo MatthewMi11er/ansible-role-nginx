@@ -22,7 +22,7 @@
     update_cache: yes
   when: nginx_repo.changed
 
-- name: Install Nginx
+- name: Install from Nginx.org Mainline
   apt:
     pkg: nginx
     update_cache: yes
