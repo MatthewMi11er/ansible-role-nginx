@@ -5,6 +5,7 @@ nginx_root: '/etc/nginx'
 nginx_enable_default_http: true
 nginx_enable_default_https: false
 nginx_install_type: mainline  # mainline | ubuntu
+nginx_sendfile: true
 
 ###############################
 ## Vars With No Default      ##
