@@ -24,6 +24,14 @@
     - Reload Nginx
   tags:
     - nginx
+    
+- name: Disable Sendfile
+  lineinfile: 
+    dest:/etc/nginx/nginx.conf
+    regexp: ^sendfile 
+    line: sendfile off
+    state: present
+  when: not nginx_sendfile|bool
 
 - name: Enable Default Site
   include: default_http.yml
