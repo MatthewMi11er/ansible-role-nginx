@@ -28,7 +28,7 @@
 - name: Disable Sendfile
   lineinfile: 
     dest: '/etc/nginx/nginx.conf'
-    regexp: '^sendfile'
+    regexp: '^\s*sendfile'
     line: 'sendfile off'
     state: present
   when: not nginx_sendfile|bool
