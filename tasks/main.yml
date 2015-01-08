@@ -32,6 +32,10 @@
     line: 'sendfile off;'
     state: present
   when: not nginx_sendfile|bool
+  notify:
+    - Reload Nginx
+  tags:
+    - nginx
 
 - name: Enable Default Site
   include: default_http.yml
